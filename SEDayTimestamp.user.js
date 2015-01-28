@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name          SEDayTimestamp
 // @namespace     http://vulpin.com/
-// @description	  Prepends a day name to the SE UTC timestamps
-// @include       http*://*.stackexchange.com/*
-// @include       http*://*.superuser.com/*
-// @include       http*://superuser.com/*
-// @include       http*://*.serverfault.com/*
-// @include       http*://serverfault.com/*
-// @include       http*://*.stackoverflow.com/*
-// @include       http*://stackoverflow.com/*
-// @require		  https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js
-// @version       1.0.0
+// @description   Prepends a day name to the SE UTC timestamps
+// @match         *://*.askubuntu.com/*
+// @match         *://*.mathoverflow.net/*
+// @match         *://*.onstartups.com/*
+// @match         *://*.serverfault.com/*
+// @match         *://*.stackapps.com/*
+// @match         *://*.stackexchange.com/*
+// @match         *://*.stackoverflow.com/*
+// @match         *://*.superuser.com/*
+// @require       https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js
+// @version       1.0.1
 // @grant         none
 // ==/UserScript==
 
@@ -45,27 +46,27 @@ var Program = {
     
     processNode: function(node) {
         if (node.title === undefined) {
-			// no date?
+            // no date?
             return;
         }
-		
-		if (node.timestamp !== undefined) {
-			// already processed
-			return;
-		}
+        
+        if (node.timestamp !== undefined) {
+            // already processed
+            return;
+        }
         
         // Save the existing timestamp (marker that it's already processed).
-		// The title text is in the format YYYY-MM-DD HH:mm:ssZ
-		node.timestamp = node.title;
-		
-		// use moment.js because native Date is useless
-		// might use stricter parse mode later
-		var date = moment(node.timestamp);
-		
-		// tell moment.js to use UTC times when formatting
-		date.utc();
-		
-		node.title = date.format('ddd, YYYY-MM-DD HH:mm:ss[Z]');
+        // The title text is in the format YYYY-MM-DD HH:mm:ssZ
+        node.timestamp = node.title;
+        
+        // use moment.js because native Date is useless
+        // might use stricter parse mode later
+        var date = moment(node.timestamp);
+        
+        // tell moment.js to use UTC times when formatting
+        date.utc();
+        
+        node.title = date.format('ddd, YYYY-MM-DD HH:mm:ss[Z]');
     }
 };
 

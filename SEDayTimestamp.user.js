@@ -11,7 +11,7 @@
 // @match         *://*.stackoverflow.com/*
 // @match         *://*.superuser.com/*
 // @require       https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js
-// @version       1.0.1
+// @version       1.0.2
 // @grant         none
 // ==/UserScript==
 
@@ -24,7 +24,7 @@ var Program = {
             // y'know what? MutationObserver sucks.
             // it doesn't give every modified node, just the top of a tree of modified nodes
             mutations.forEach(function(mutation) {
-                Array.prototype.forEach.call(mutation.addedNodes, Program.processImgDescendants);
+                Array.prototype.forEach.call(mutation.addedNodes, Program.processDescendants);
             });
         });
         

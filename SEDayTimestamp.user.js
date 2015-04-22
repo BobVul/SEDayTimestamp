@@ -11,7 +11,7 @@
 // @match         *://*.stackoverflow.com/*
 // @match         *://*.superuser.com/*
 // @require       https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js
-// @version       1.0.2
+// @version       1.0.3
 // @grant         none
 // ==/UserScript==
 
@@ -37,6 +37,10 @@ var Program = {
     },
     
     processDescendants: function(node) {
+        if (!node) {
+            return;
+        }
+        
         var nodes = node.querySelectorAll('span.relativetime, span.relativetime-clean');
         
         Array.prototype.forEach.call(nodes, function(node) {
